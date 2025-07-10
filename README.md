@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## ML Problem
 Workflow Pain Point: Manually predicting energy output and identifying abnormal patterns in soalr data is time consuming and error-prone. Automating this proccess will conserve time and allow teams to be proactive by predicting potential maintenance issues and forecast energy distribution in advance.
 
@@ -78,3 +79,6 @@ Max Module Temp
 -  Create login screen with specific user profile
 - Get API key to autogenerate summaries using ChatGPT
 - Refine UI to look more professional (tailor it to my liking)
+=======
+# VoltView
+Full Project Contents
