@@ -4,10 +4,8 @@ import plotly.express as px
 from sklearn.ensemble import IsolationForest
 from generate_mock_summary import generate_mock_summary
 
-# page config
 st.set_page_config(page_title="VoltView Energy Dashboard", layout="wide")
 
-# Styles
 st.markdown("""
    <style>
        .main { background-color: #f0f8ff; }
@@ -18,11 +16,9 @@ st.markdown("""
    </style>
 """, unsafe_allow_html=True)
 
-# --- Header ---
 st.markdown("# VoltView Energy Dashboard")
 st.markdown("### Remedies for a Greener Future™")
 
-# Sidebar: File Upload & Filters 
 with st.sidebar:
    st.markdown("""
        <style>
@@ -49,16 +45,13 @@ with st.sidebar:
    min_date, max_date = data['Date'].min(), data['Date'].max()
    start_date, end_date = st.date_input("Select Date Range", [min_date, max_date], min_value=min_date, max_value=max_date)
 
-# Filter Data 
 filtered_data = data[(data["Date"] >= pd.to_datetime(start_date)) & (data["Date"] <= pd.to_datetime(end_date))]
 
-# Anomaly Detection 
 features = ['Efficiency', 'IRRADIATION_Wm2', 'AMBIENT_TEMP_C', 'MODULE_TEMP_C', 'DAILY_YIELD_kWh']
 model = IsolationForest(n_estimators=100, contamination=0.01, random_state=42)
 filtered_data['Anomaly'] = model.fit_predict(filtered_data[features])
 anomalies = filtered_data[filtered_data['Anomaly'] == -1]
 
-# KPIs 
 kpi1 = filtered_data['DAILY_YIELD_kWh'].sum()
 kpi2 = len(anomalies)
 kpi3 = filtered_data['Efficiency'].mean()
@@ -71,7 +64,6 @@ kpi_col2.metric("Anomalies Flagged", kpi2)
 kpi_col3.metric("Avg. Efficiency", f"{kpi3:.2f}")
 kpi_col4.metric("Max Module Temp (°C)", f"{kpi4:.1f}")
 
-# Tabs
 tab1, tab2 = st.tabs(["Dashboard", "Anomaly Logs"])
 
 with tab1:
@@ -117,7 +109,6 @@ with tab2:
 
    st.markdown("### Alert Log")
 
-   # Extra search for log
    log_search = st.text_input("Search log by any field (e.g. 2025-07-06, 3200, 0.87):", key="log_search").lower()
    if log_search:
        filtered_log = alerts_filtered[alerts_filtered.apply(
@@ -129,10 +120,9 @@ with tab2:
        date_str = row['Date'].strftime('%Y-%m-%d %H:%M')
        st.markdown(f"- **{date_str}** | Yield: **{row['Daily Yield (kWh)']:.2f} kWh**, Efficiency: **{row['Efficiency']:.2f}**, Module Temp: **{row['Module Temp (°C)']:.1f}°C**")
 
-# Download Button 
 csv = alerts_df.to_csv(index=False).encode('utf-8')
 st.download_button(
-   label="📥 Download Anomalies (CSV)",
+   label="Download Anomalies (CSV)",
    data=csv,
    file_name="anomaly_alerts.csv",
    mime="text/csv"
@@ -140,11 +130,9 @@ st.download_button(
 from datetime import datetime
 import os
 
-# Define Google Drive Path 
 google_drive_path = "/Users/kristengallagher/Library/CloudStorage/GoogleDrive-kristengallagher999@gmail.com/My Drive/VoltView_Alerts"
 os.makedirs(google_drive_path, exist_ok=True)
 
-# Prepare Zapier Trigger File 
 zapier_alerts = anomalies[['Date', 'DAILY_YIELD_kWh']].copy()
 zapier_alerts.rename(columns={
     'Date': 'date',
@@ -152,31 +140,26 @@ zapier_alerts.rename(columns={
 }, inplace=True)
 zapier_alerts.to_csv(os.path.join(google_drive_path, "alerts_today.csv"), index=False)
 
-# Save Timestamped Alert CSV
 today_str = datetime.now().strftime('%Y-%m-%d')
 alerts_csv_path = os.path.join(google_drive_path, f"alerts_{today_str}.csv")
 alerts_df.to_csv(alerts_csv_path, index=False)
 
-# Generate Summary Stats
 avg_eff = anomalies['Efficiency'].mean()
 max_temp = anomalies['MODULE_TEMP_C'].max()
 total_energy = anomalies['DAILY_YIELD_kWh'].sum()
 
-# Save summary as plain-text final row for Zapier
 with open(os.path.join(google_drive_path, "alerts_today.csv"), "a") as f:
     f.write(f"SUMMARY, Avg. Efficiency: {kpi3:.2f}, Max Temp: {kpi4:.1f}°C, Total Energy: {kpi1:,.0f} kWh\n")
 
-#  Save Summary CSV for Zapier
 summary_only_path = os.path.join(google_drive_path, "alerts_summary_only.csv")
 with open(summary_only_path, "w") as f:
     f.write(f"SUMMARY, Avg. Efficiency: {kpi3:.2f}, Max Temp: {kpi4:.1f}°C, Total Energy: {kpi1:,.0f} kWh\n")
 
 import requests
 
-# 1.  Slack webhook URL
 slack_webhook_url = "https://hooks.slack.com/services/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"
 
-# 2. Create message --> USE KPI variables
+ USE KPI variables
 message = (
     "Anomaly Detected in Today's Solar Output\n\n"
     f"Energy Output: {kpi1:,.0f} kWh\n"
@@ -185,16 +168,13 @@ message = (
     "Check your VoltView_Alerts folder for full data."
 )
 
-# 3. Send message to Slack
 response = requests.post(slack_webhook_url, json={"text": message})
 
-# 4. Print whether if it works or not
 if response.status_code == 200:
     print("Slack alert sent.")
 else:
     print("Slack alert failed:", response.text)
 
-# trademark
 st.markdown("""
    <div style='text-align: center; padding: 10px; color: #003366;'>
        <strong>VoltView</strong> | Your Renewable Remedy™
