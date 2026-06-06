@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-from sklearn.ensemble import IsolationForest
+import ai_module
 from generate_mock_summary import generate_mock_summary
 
 st.set_page_config(page_title="VoltView Energy Dashboard", layout="wide")
@@ -48,8 +48,8 @@ with st.sidebar:
 filtered_data = data[(data["Date"] >= pd.to_datetime(start_date)) & (data["Date"] <= pd.to_datetime(end_date))]
 
 features = ['Efficiency', 'IRRADIATION_Wm2', 'AMBIENT_TEMP_C', 'MODULE_TEMP_C', 'DAILY_YIELD_kWh']
-model = IsolationForest(n_estimators=100, contamination=0.01, random_state=42)
-filtered_data['Anomaly'] = model.fit_predict(filtered_data[features])
+model = ai_module.train_model(filtered_data[features])
+filtered_data['Anomaly'] = ai_module.predict(model, filtered_data[features])
 anomalies = filtered_data[filtered_data['Anomaly'] == -1]
 
 kpi1 = filtered_data['DAILY_YIELD_kWh'].sum()
