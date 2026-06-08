@@ -50,7 +50,7 @@ Indicators for each days output labeling it as either normal or anomalous then a
 Uses ML to detect abnormal patterns in solar panel data. It analyzes efficiency, temp, and irradiance (sunlight), to automatically flag days with abnormal output. Its purpose is to replace manual data analysis with a faster, more accurate system that identifies potential issues and summarizes performance. It will eventually be used to alert technicians when a problem occurs so they can fix it immediately. 
 
 ## Model & Metrics Used
-Isolation Forest model for anomaly detection—found outliers without labels →  tested different parameters to see which one flagged the lowest-efficiency points.
+Isolation Forest model for anomaly detection; found outliers without labels →  tested different parameters to see which one flagged the lowest-efficiency points.
 
 ## Metric: 
 Average efficiency of flagged anomalies (AC/DC power ratio) → model flags low-efficiency points as anomalies.
@@ -81,7 +81,7 @@ Max Module Temp
 
 ## In Progress:
 - Connect ChatGPT API to prototype to automate summaries (still uses mock summaries, I need to purchase and implement an API key)
-- Refine UI to look like figma base and add more complex features; Figma → Pixel-perfect match: Final frontend diverged slightly from initial designs due to Streamlit layout limitations
+- Refine UI to look like figma base and add more complex features; Figma → Final frontend diverged slightly from initial designs due to Streamlit layout limitations
 - Login system not created yet
 
 **Remedies for a Greener Future**
