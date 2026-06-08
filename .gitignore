@@ -7,3 +7,5 @@ __pycache__/
 
 .DS_Store
 **/.DS_Store
+
+ANTHROPIC_API_KEY=sk-ant-YOUR-KEY-HERE
