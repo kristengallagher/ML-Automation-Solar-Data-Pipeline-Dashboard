@@ -25,7 +25,7 @@ Solar panel performance data for {date_range}:
         response = client.messages.create(
             model="claude-opus-4-8",
             max_tokens=300,
-            system="You are a solar energy analyst. Write a concise 3-sentence weekly summary of solar panel performance based on the data provided. Be specific and actionable. No bullet points — plain flowing sentences only.",
+            system="You are a solar energy analyst. Write a concise 3-sentence weekly summary of solar panel performance based on the data provided. Be specific and actionable. No bullet points, plain flowing sentences only.",
             messages=[{"role": "user", "content": stats}]
         )
         return response.content[0].text
