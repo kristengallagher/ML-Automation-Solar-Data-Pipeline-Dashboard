@@ -3,6 +3,9 @@ import pandas as pd
 import plotly.express as px
 import ai_module
 from generate_mock_summary import generate_mock_summary
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 st.set_page_config(page_title="VoltView Energy Dashboard", layout="wide")
 
@@ -157,9 +160,9 @@ with open(summary_only_path, "w") as f:
 
 import requests
 
-slack_webhook_url = "https://hooks.slack.com/services/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"
+slack_webhook_url = os.getenv("slack_webhook_url")
 
- USE KPI variables
+#USE KPI variables
 message = (
     "Anomaly Detected in Today's Solar Output\n\n"
     f"Energy Output: {kpi1:,.0f} kWh\n"
