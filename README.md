@@ -2,7 +2,7 @@
 Machine learning & AI-powered solar energy monitoring dashboard that automatically detects panel anomalies, analyzes performance, and alerts technicians in real-time.
 
 ## ML Problem:
-Workflow Pain Point: Manually predicting energy output and identifying abnormal patterns in solar data is time consuming and error-prone. Automating this process will conserve time and allow teams to be proactive by predicting potential maintenance issues and forecast energy distribution in advance. Insights will be localized to a dashboard for all team members to access so data analysts can save time explaining discrepencies to other teams.
+Manually predicting energy output and identifying abnormal patterns in solar data is time consuming and error-prone. Automating this process will conserve time and allow teams to be proactive by predicting potential maintenance issues and forecast energy distribution in advance. Insights will be localized to a dashboard for all team members to access so data analysts can save time explaining discrepencies to other teams.
 
 ## Use Cases
  
