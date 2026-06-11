@@ -1,6 +1,5 @@
 from sklearn.ensemble import IsolationForest
 
-# Train Isolation Forest model
 def train_model(X):
     model = IsolationForest(
         n_estimators=100,
@@ -11,6 +10,5 @@ def train_model(X):
     model.fit(X)
     return model
 
-# Predict anomalies
 def predict(model, X):
     return model.predict(X)
