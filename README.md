@@ -10,7 +10,7 @@ Workflow Pain Point: Manually predicting energy output and identifying abnormal 
 **Performance Benchmarking:** Compare panels and track degradation  
 **Financial Tracking:** Quantify revenue impact of equipment issues  
 **Technician Alerts:** Automated work order triggers  
-**Compliance:** Audit trail of system performance  
+**Compliance:** Audit trail of system performance
 
 ## Tech Stack
  
@@ -79,9 +79,8 @@ Average Efficiency
 Max Module Temp
 
 
-## In Progress:
-- Connect ChatGPT API to prototype to automate summaries (still uses mock summaries, I need to purchase and implement an API key)
-- Refine UI to look like figma base and add more complex features; Figma → Final frontend diverged slightly from initial designs due to Streamlit layout limitations
+## :
+- Refine UI to look like figma base and add features
 - Login system not created yet
 
 **Remedies for a Greener Future**
