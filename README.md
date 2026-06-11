@@ -79,7 +79,7 @@ Average Efficiency
 Max Module Temp
 
 
-## :
+##
 - Refine UI to look like figma base and add features
 - Login system not created yet
 
