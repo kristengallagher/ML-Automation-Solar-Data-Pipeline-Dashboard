@@ -6,7 +6,7 @@ Built interactive visualizations with Plotly for anomaly detection and yield tre
 Integrated a tabbed dashboard with searchable alert logs
 Enabled file export functionality (CSV) and Google Drive output automation
 Triggered Zapier and Slack alerts using requests and Zapier-exported CSVs
-Delivered summaries using an LLM fallback function (mock summary generator)
+Delivered summaries using an LLM function; Anthropic API key 
 Polished frontend styling with custom CSS for professional, branded UI
 
 ## What I would work on with more time:
